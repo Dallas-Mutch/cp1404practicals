@@ -6,15 +6,17 @@ Pseudocode for temperature conversion
 MENU = """C - Convert Celsius to Fahrenheit
 F - Convert Fahrenheit to Celsius
 Q - Quit"""
-
+celsius = ""
+fahrenheit = ""
 
 def main():
+    global celsius
     print(MENU)
     choice = input(">>> ").upper()
     while choice != "Q":
         if choice == "C":
             celsius = float(input("Celsius: "))
-            fahrenheit = celsius * 9.0 / 5 + 32
+            fahrenheit = celsius_to_fahrenheit(celsius)
             print("Result: {:.2f} F".format(fahrenheit))
         elif choice == "F":
             fahrenheit = float(input("Fahrenheit: "))
@@ -26,10 +28,12 @@ def main():
         choice = input(">>> ").upper()
 
 
+def celsius_to_fahrenheit(celsius):
+    return celsius * 9.0 / 5 + 32
+
+
 def fahrenheit_to_celsius(fahrenheit):
-    global celsius
-    celsius = 5 / 9 * (fahrenheit - 32)
-    return fahrenheit
+    return 5 / 9 * (fahrenheit - 32)
 
 
 print("Thank you.")
