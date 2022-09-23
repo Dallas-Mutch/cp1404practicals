@@ -14,7 +14,7 @@ def main():
         if choice == "G":
             score = get_valid_score()
         elif choice == "P":
-            # print(score)
+            score_results(score)
             print_score_star(score)
         else:
             print("Invalid option")
@@ -30,6 +30,13 @@ def get_valid_score():
         score = int(input("What is your score?: "))
     return score
 
+def score_results(score):
+    if score >= 90:
+        print("Excellent")
+    elif score >= 50:
+        print("Passable")
+    else:
+        print("Bad")
 
 def print_score_star(score):
     for i in range(score):
