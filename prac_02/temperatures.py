@@ -29,6 +29,7 @@ def main():
 def fahrenheit_to_celsius(fahrenheit):
     global celsius
     celsius = 5 / 9 * (fahrenheit - 32)
+    return fahrenheit
 
 
 print("Thank you.")
