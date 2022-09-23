@@ -10,12 +10,12 @@ def main():
     score = ""
     print("Menu:")
     choice = input("> ").upper()
-
     while choice != "Q":
         if choice == "G":
             score = get_valid_score()
         elif choice == "P":
-            print(score)
+            # print(score)
+            print_score_star(score)
         else:
             print("Invalid option")
         print("Menu: ")
@@ -30,7 +30,10 @@ def get_valid_score():
         score = int(input("What is your score?: "))
     return score
 
-def print_score_star():
+
+def print_score_star(score):
+    for i in range(score):
+        print("*", end="")
 
 
 main()
