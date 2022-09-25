@@ -30,6 +30,7 @@ def get_valid_score():
         score = int(input("What is your score?: "))
     return score
 
+
 def score_results(score):
     if score >= 90:
         print("Excellent")
@@ -37,6 +38,7 @@ def score_results(score):
         print("Passable")
     else:
         print("Bad")
+
 
 def print_score_star(score):
     for i in range(score):
