@@ -16,9 +16,9 @@ MAX_PRICE = 100.0
 INITIAL_PRICE = 1.0
 OUTPUT_FILE = "capitalist_conrad.txt"
 
+out_file = open(OUTPUT_FILE, "w")
 number_of_days = 0
 price = INITIAL_PRICE
-out_file = open(OUTPUT_FILE, "w")
 print("Starting price: ${:,.2f}".format(price), file=out_file)
 # print(f"Starting price: {INITIAL_PRICE}")
 while price >= MIN_PRICE and price <= MAX_PRICE:
