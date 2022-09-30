@@ -14,14 +14,16 @@ MAX_DECREASE = 0.05  # 5%
 MIN_PRICE = 0.01
 MAX_PRICE = 100.0
 INITIAL_PRICE = 1.0
+OUTPUT_FILE = "capitalist_conrad.txt"
 
 number_of_days = 0
 price = INITIAL_PRICE
-out_file = open("capitalist_conrad.txt", "w")
+out_file = open(OUTPUT_FILE, "w")
 print("Starting price: ${:,.2f}".format(price), file=out_file)
 # print(f"Starting price: {INITIAL_PRICE}")
 while price >= MIN_PRICE and price <= MAX_PRICE:
     price_change = 0
+    number_of_days += 1
     # generate a random integer of 1 or 2
     # if it's 1, the price increases, otherwise it decreases
     if random.randint(1, 2) == 1:
@@ -33,7 +35,6 @@ while price >= MIN_PRICE and price <= MAX_PRICE:
         # between negative MAX_DECREASE and 0
         price_change = random.uniform(-MAX_DECREASE, 0)
 
-    number_of_days += 1
     price *= (1 + price_change)
     # print("${:,.2f}".format(price))
     print(f"on this day {number_of_days}", ": ${:,.2f}".format(price), file=out_file)
