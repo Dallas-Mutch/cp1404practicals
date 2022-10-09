@@ -1,11 +1,25 @@
 import random
-MIN = 1
-MAX = 45
-quick_picks = [1, 2, 3, 4, 5]
+MIN_NUMBER = 1
+MAX_NUMBER = 45
+ROW_OF_NUMBERS = 6
 
-quick_pick = int(input("How many quick picks? "))
-for row in range(MAX):
-    i = random.randint
-    for column in range(1):
-    #     print(column)
-        print(row, column)
+
+def main():
+
+    number_of_quick_picks = int(input("How many quick picks? "))
+    while number_of_quick_picks < 0:
+        print("Invalid number, cannot be 0")
+        number_of_quick_picks = int(input("How many quick picks? "))
+
+    for column in range(number_of_quick_picks):
+        quick_pick = []
+        for row in range(ROW_OF_NUMBERS):
+            numbers = random.randint(MIN_NUMBER, MAX_NUMBER)
+            while numbers in quick_pick:
+                numbers = random.randint(MIN_NUMBER, MAX_NUMBER)
+            quick_pick.append(numbers)
+        quick_pick.sort()
+        print(" ".join(f"{numbers:2}" for numbers in quick_pick))
+
+
+main()
