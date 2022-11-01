@@ -1,16 +1,21 @@
+CURRENT_YEAR = 2022
+VINTAGE_AGE = 50
+
+
 class Guitar:
-    def __init__(self, name="", year=0, cost=0):
+    def __init__(self, name="", year=0, cost=0.0):
+        """Ininitalise guitars"""
         self.name = name
         self.year = year
         self.cost = cost
 
     def __str__(self):
-        return f"Guitar={self.name}({self.year}: {self.cost})"
+        """Returns string for data in init"""
+        return f"Guitar={self.name}({self.year}) : {self.cost}"
 
-    def get_age(self, age):
-        self.year -= age
-        return age
+    def get_age(self):
+        "Get age of the guitar in years"
+        return CURRENT_YEAR - self.year
 
-    def is_vintage(self, age):
-        if self.get_age(age) > 50:
-            return True
+    def is_vintage(self):
+        return self.get_age() >= VINTAGE_AGE
