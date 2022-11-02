@@ -11,20 +11,15 @@ def main():
     """Demo test code to show how to use car class."""
     my_car = Car("My car", 180)
     my_car.drive(30)
-    # print(f"Car has fuel: {my_car.fuel}")
-    # print(my_car)
-    # my_car.__str__()
+    print(f"Car has fuel: {my_car.fuel}")
+    print(my_car)
+    print()
 
     limo = Car("Limo", 100)
     limo.add_fuel(20)
-    print("Limo has fuel: ",limo.fuel)
+    print("Limo has fuel:", limo.fuel)
     limo.drive(115)
-    print(f"{my_car}, \n{limo}")
-    # print(limo)
-    name = input("Car: ")
-    fuel = int(input("Fuel: "))
-    _odometer = int(input("Odometer: "))
-    car_model = Car(name, fuel)
-    print(car_model.name, car_model.fuel)
+    print(limo)
+
 
 main()
