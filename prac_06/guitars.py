@@ -20,11 +20,10 @@ def main():
     guitars.append(Guitar("Line 6 JTV-59", 2010, 1512.9))
 
     for i, guitar in enumerate(guitars, 1):
+        vintage_string = ""
         if guitar.is_vintage():
-            vintage_string = " "
-        else:
             vintage_string = " (vintage)"
-            print(f"Guitar{1}: {guitar.name:>10} ({guitar.year}), worth ${guitar.cost:10, .2f}{vintage_string}")
+        print("Guitar{0}: {1.name:>10} ({1.year}), worth ${1.cost:10, .2f}{2}".format(i, guitar, vintage_string))
 
 
 if __name__ == '__main__':
