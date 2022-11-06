@@ -19,12 +19,14 @@ def main():
             filename = input("Enter a filename to save: ")
             save_projects(projects, filename)
         elif choice == "D":
+            get_data(FILENAME)
             display_projects(projects)
         elif choice == "F":
             pass
         elif choice == "A":
             add_projects(projects)
         elif choice == "U":
+            get_data(FILENAME)
             update_project(projects)
         else:
             print("Invalid choice")
@@ -40,9 +42,10 @@ def load_project(filename):
     in_file.readline()
     for line in in_file:
         parts = line.strip().split()
-        date = datetime.datetime.strptime(parts[1], "%d/%m/%Y").date()
-        project = Project(parts[0], date, int(parts[2]), int(parts[3]), int(parts[4]))
-        projects.append(project)
+        # date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+        # project = Project(parts[0], date, int(parts[2]), int(parts[3]), int(parts[4]))
+        # projects.append(project)
+        # print(parts)
     in_file.close()
     return projects
 
@@ -73,16 +76,15 @@ def display_projects(projects):
 def add_projects(projects):
     """Use append to add projects"""
     with open(FILENAME, "a", encoding="utf-8") as in_file:
-        try:
+        for line in in_file:
             name = input("Name: ")
-            print(name)
-        except ValueError:
-            pass
-        try:
-            start_date = input("Start date (dd/mm/yy): ")
-            print(start_date)
-        except ValueError:
-            pass
+            date_string = input("Date (dd/mm/yyyy): ")
+            date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+            print(date.strftime("%d/%m/%Y"))
+            priority = int(input("Priority: "))
+            percentage = int(input("Percent complete: "))
+        projects.append(line)
+        print(file=in_file)
 
 
 def update_project(projects):
@@ -91,6 +93,12 @@ def update_project(projects):
     update = input("Project choice: ")
     project = projects[update]
     print(project)
+
+    # project_complete = int(input("New Percentage: "))
+    # while project_complete != "":
+    #     project_complete = int(input("New Percentage: "))
+    #     project.project_complete = project_complete
+    # return project_complete
     try:
         project_complete = int(input("New Percentage: "))
         project.project_complete = project_complete
@@ -101,6 +109,16 @@ def update_project(projects):
         project.priority_check = priority_check
     except ValueError:
         pass
+
+
+def get_data(filename):
+    projects = []
+    with open(filename, "r", encoding="utf-8") as in_file:
+        in_file.readline()
+        for line in in_file:
+            sections = line.strip().split(',')
+            projects.append(sections)
+    return projects
 
 
 if __name__ == '__main__':
