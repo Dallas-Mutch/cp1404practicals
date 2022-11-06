@@ -13,7 +13,7 @@ class Project:
         self.cost = cost
         self.completion = completion
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self.name}, Start: {self.date.strftime('%d/%m/%Y')}, priority {self.priority}, estimate: {self.cost}, completion: " \
                f"{self.completion}%"
 
