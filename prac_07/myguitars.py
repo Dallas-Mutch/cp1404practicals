@@ -1,22 +1,25 @@
 from prac_07.guitar import Guitar
-import csv
 
 FILENAME = "guitars.csv"
 
 
 def main():
-    #     get_guitars(FILENAME)
-    #     guitars = Guitar()
     get_guitars()
-    # guitars = []
-    # name = input("Name: ")
-    # while name != "":
-    #     year = int(input("Year: "))
-    #     cost = float(input("Cost: $"))
-    #     guitar_to_add = Guitar(name, year, cost)
-    #     guitars.append(guitar_to_add)
-    #     print(guitar_to_add)
-    #     name = input("Name: ")
+    add_guitar(FILENAME)
+
+
+def add_guitar(filename):
+    guitars = []
+    with open(filename, 'a') as out_file:
+        name = input("Name: ")
+        while name != "":
+            year = int(input("Year: "))
+            cost = float(input("Cost: $"))
+            guitar_to_add = Guitar(name, year, cost)
+            guitars.append(guitar_to_add)
+            print(guitar_to_add, file=out_file)
+            name = input("Name: ")
+    return guitars
 
 
 def get_guitars():
