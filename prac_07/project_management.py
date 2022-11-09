@@ -3,6 +3,7 @@ import datetime
 MENU = """- (L)oad projects\n- (S)ave projects\n- (D)isplay projects\n- (F)ilter projects by date
 - (A)dd new project\n- (U)pdate project\n- (Q)uit"""
 FILENAME = "projects.txt"
+HEADER = "Name", "Start Date", "Priority", "Cost Estimate", "Completion Percentage"
 
 from prac_07.project import Project
 
@@ -23,7 +24,7 @@ def main():
         elif choice == "F":
             pass
         elif choice == "A":
-            add_projects(projects)
+            add_projects()
         elif choice == "U":
             update_project(projects)
         else:
@@ -36,24 +37,23 @@ def main():
 
 def load_project(filename):
     projects = []
-    in_file = open(filename, encoding="utf-8")
-    in_file.readline()
-    for line in in_file:
-        parts = line.strip().split("\t")
-        date = datetime.datetime.strptime('12/09/2021', "%d/%m/%Y")
-        project = Project(parts[0], date, int(parts[2]),float(parts[3]), int(parts[4]))
-        projects.append(project)
-        print(parts)
-    in_file.close()
+    with open(filename, encoding="utf-8") as in_file:
+        in_file.readline()
+        for line in in_file:
+            parts = line.strip().split('\t')
+            date = datetime.datetime.strptime('12/09/2021', "%d/%m/%Y")
+            project = Project(parts[0], date, int(parts[2]), float(parts[3]), int(parts[4]))
+            projects.append(project)
     return projects
 
 
 def save_projects(projects, filename):
     """Write to the file and saves the project"""
     out_file = open(filename, "w", encoding="utf-8")
+    print(HEADER, file=out_file)
     for project in projects:
         print(
-            f"{project.name}, {project.start_date}, {project.priority}, {project.cost_estimate}, {project.completion_percentage}",
+            f"{project.name}, {project.start_date.strftime}, {project.priority}, {project.cost_estimate}, {project.completion_percentage}",
             file=out_file)
     out_file.close()
 
@@ -72,18 +72,22 @@ def display_projects(projects):
         print(" ", project)
 
 
-def add_projects(projects):
+def add_projects():
     """Use append to add projects"""
-    with open(FILENAME, "a", encoding="utf-8") as in_file:
-        for line in in_file:
-            name = input("Name: ")
+    projects = []
+    with open('projects.txt', "a") as out_file:
+        name = input("Name: ")
+        while name != "":
             date_string = input("Date (dd/mm/yyyy): ")
             date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
-            print(date.strftime("%d/%m/%Y"))
             priority = int(input("Priority: "))
+            cost = float(input("Cost estimate: "))
             percentage = int(input("Percent complete: "))
-        projects.append(line)
-        print(file=in_file)
+            project_to_add = Project(name, date, priority, cost, percentage)
+            projects.append(project_to_add)
+            print(project_to_add, date.strftime("%d/%m/%Y"), file=out_file)
+            name = input("Name: ")
+    return projects
 
 
 def update_project(projects):
@@ -110,7 +114,7 @@ def get_data():
     in_file.readline()
     for line in in_file:
         parts = line.strip().split("\t")
-        start_date = datetime.datetime.strptime('12/09/2021', "%d/%m/%Y")
+        start_date = datetime.datetime.strptime(parts[1], "%d/%m/%Y")
         project = Project(parts[0], start_date, int(parts[2]), float(parts[3]), int(parts[4]))
         projects.append(project)
         projects.sort()
