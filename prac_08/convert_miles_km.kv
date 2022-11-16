@@ -1,0 +1,25 @@
+BoxLayout:
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        TextInput:
+            id: input_number
+            text: '10'
+            font_size: 48
+            multiline: False
+        BoxLayout:
+            orientation: 'vertical'
+            Button:
+                text: 'up'
+                on_press: app.handle_increments(1)
+            Button:
+                text: 'down'
+                on_press: app.handle_increments(-1)
+#    Button:
+#        text: 'Convert M toa KM'
+#        on_press: app.handle_conversion()
+    Label:
+        text: '16.09344'
+        id: output_number
+        font_size: 48
+        color: (1, 0, 60, 1)
